@@ -1,0 +1,13 @@
+# C tags
+cachegrind.*
+workload
+tags
+test
+bench
+dbench
+*.dot
+*.pdf
+*.png
+*.jpg
+*.o
+*.so

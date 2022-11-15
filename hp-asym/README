@@ -1,0 +1,36 @@
+# Hazard Pointers
+
+C library implementation of hazard pointers.
+Hazard Pointers are a possible solution to the memory reclamation problem in lock-free objects.
+
+## Memory Reclamation Problem
+In a blocking program, one thread gains exclusive access to shared memory when removing its objects.
+After detaching a removed object from shared memory, no other threads can hold pointers to it.
+Thus, memory from such objects may be released right then and there.
+
+In a non blocking program, threads may still hold pointers to detached objects.
+After the memory of a removed object is released, other threads may still try to access it.
+
+The A.B.A. problem goes hand in hand with the described issue.
+
+## Hazard Pointers' Mechanism
+Before accessing a pointer from the shared data structure, a thread must protect it.
+This will prevent the reclamation of memory locations currently in use.
+Threads protect pointers by storing them in hazard pointers.
+During the periodic memory reclamation process, a thread must verify every hazard pointer before releasing memory.
+
+## Bibliography
+- Michael, 2004, Hazard Pointers: Safe Memory Reclamation for Lock-Free Objects;
+- Alexandrescu and Michael, 2004, Lock-Free Data Structures with Hazard Pointers;
+- Michael and Wong, 2016, Hazard Pointers (C++ standard proposal);
+
+## Build
+```
+$ make
+```
+
+## Link
+```
+$ cc example.c libhp.a
+```
+
